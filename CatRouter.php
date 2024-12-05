@@ -2,6 +2,7 @@
 include_once "GenericREST.php";
 include_once "CatDAO.php";
 $REST = new GenericREST(new CatDAO());
+$REST->DAO::connect();
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$data = file_get_contents("php://input");
 	$newCat = Cat::jsonToCat($data);
@@ -12,7 +13,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	}
 	
 	$response = $REST->post($newCat);
-	$newCat->setId($response);
+	if($response == null){
+		http_response_code(500);
+		echo "Internal Server Error";
+		return;
+	}
 	http_response_code(200);
 	echo $newCat->toJson();
 }
@@ -21,13 +26,18 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 	if(isset($_GET["id"]))
 		$request = $_GET["id"];
 	$response = $REST->get($request);
-	if($response == ""){
+	if($response == null){
 		http_response_code(404);
 		echo "Entity not found";
 		return;
 	}
+	$list_json = [];
+	foreach ($response as $item) {
+		$list_json[] = $item->toJson();
+	}
+	$list_json = implode(",", $list_json);
 	http_response_code(200);
-	echo $response;
+	echo "[".$list_json."]";
 }
 if($_SERVER["REQUEST_METHOD"] == "PUT"){
 	$data = file_get_contents("php://input");
@@ -38,7 +48,6 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
 		return;
 	}
 	$response = $REST->put($catToUpdate);
-	var_dump($response);
 	if($response){
 		http_response_code(404);
 		echo "Entity not found";
@@ -49,15 +58,17 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
 	}
 }
 if($_SERVER["REQUEST_METHOD"] == "DELETE"){
-	$data = file_get_contents("php://input");
-	$decoded = json_decode($data);
-	if($decoded->id == null){
+	$request = 0;
+	if(isset($_GET["id"]))
+		$request = $_GET["id"];
+
+	if($request == 0){
 		http_response_code(400);
-		echo "Bad Request";
+		echo "Bad request";
 		return;
 	}
 
-	$catToDelete = new Cat($decoded->id,"",0);
+	$catToDelete = new Cat($request,"",0);
 	$response = $REST->delete($catToDelete);
 	if($response){
 		http_response_code(404);

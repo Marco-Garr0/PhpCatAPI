@@ -15,6 +15,9 @@ abstract class GenericDAO{
 			}
 		}
 	}
+	public static function disconnect(){
+		GenericDAO::$connection = null;
+	}
 
 	public abstract static function create(object $object): int;
 	public abstract static function readById(int $id): ?object;

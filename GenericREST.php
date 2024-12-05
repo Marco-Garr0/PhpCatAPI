@@ -3,32 +3,36 @@ include_once "GenericDAO.php";
 
 class GenericREST{
 
-	private ?GenericDAO $DAO = null;
+	public ?GenericDAO $DAO = null;
 	public function __construct(GenericDAO $DAO){
 		$this->DAO = $DAO;
-	} 
-	public function post(object $request): int{
-		$result = $this->DAO::create($request);
-		return $result;
 	}
-	public function get(int $request): String{
+	public function post(object $request): ?object{
+		try{
+			$this->DAO::create($request);
+		}catch (PDOException $e){
+			return null;
+		}
+		return $request;
+	}
+	public function get(int $request): ?array{
 		if($request != 0){
+			$response = [];
 			$result = $this->DAO::readById($request);
 			if($result == null)
-				return "";
-			return $result->toJson();
+				return null;
+			$response[] = $result;
+			return $response;
 		}
 		else{
 			$result = $this->DAO::readAll();
-			$list_json = [];
-			foreach ($result as $item) {
-				$list_json[] = $item->toJson();
-			}
-			$list_json = implode(",", $list_json);
-			return "[".$list_json."]";
+			return $result;
 		}
 	}
 	public function put(object $request): bool{
+		$tupleExists = $this->DAO::readById($request->getId());
+		if($tupleExists == null)
+			return true;
 		$result = $this->DAO::update($request);
 		return $result;
 	}

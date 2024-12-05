@@ -3,31 +3,28 @@ include_once "GenericDAO.php";
 include_once "Cat.php";
 
 class CatDAO extends GenericDAO{
-	
 	public static function create(object $object): int{
     		try{
-			GenericDAO::connect();
       			$sql = "INSERT INTO cats VALUES(NULL, :name, :age);";
       			$statement = GenericDAO::$connection->prepare($sql);
       			$statement->execute([
         			"name" => $object->getName(), 
         			"age" => $object->getAge()
       			]);
+			$object->setId(GenericDAO::$connection->lastInsertId());
       			return GenericDAO::$connection->lastInsertId();
 
-		}catch(PDOException $exception){
-      			$exception->getMessage();
-      			return -1;
-    		}
-
-    		return 1;
+		}
+		catch(PDOException $exception){
+      		$exception->getMessage();
+      		return -1;
+		}
 	}
 
 
 	public static function readById(int $id): ?object{
     		try{
-			GenericDAO::connect();
-		      	$sql = "SELECT * FROM cats WHERE id = ".$id.";";
+			  	$sql = "SELECT * FROM cats WHERE id = ".$id.";";
 		        $result = GenericDAO::$connection->query($sql);
 		        $row = $result->fetch();
 		        if($row == false)
@@ -43,7 +40,6 @@ class CatDAO extends GenericDAO{
 
 	public static function readAll(): ?array{
 		try{
-			GenericDAO::connect();
 			$sql = "SELECT * FROM cats;";
 			$resultSet = GenericDAO::$connection->query($sql);
 			$results = $resultSet->fetchAll();
@@ -62,7 +58,6 @@ class CatDAO extends GenericDAO{
 	}
 	public static function readAllByAge(int $minAge, int $maxAge): ?array{
 		try{
-			GenericDAO::connect();
 			$sql = "SELECT * FROM cats WHERE age>".$minAge." AND age<".$maxAge.";";
 			$resultSet = GenericDAO::$connection->query($sql);
 			$results = $resultSet->fetchAll();
@@ -70,9 +65,9 @@ class CatDAO extends GenericDAO{
 				return null;
 
 			$cats = [];
-			foreach($results as $result){
+			foreach($results as $result)
 				$cats[] = new Cat($result["id"], $result["name"], $result["age"]);
-			}
+			
 		}catch(PDOException $e){
 			echo $e->getMessage();
 			return null;
@@ -86,7 +81,7 @@ class CatDAO extends GenericDAO{
       			GenericDAO::connect();
       			$sql = "UPDATE cats SET name = :name, age = :age WHERE id = :id;";
       			$statement = GenericDAO::$connection->prepare($sql);
-			var_dump($object->getId());
+
       			return !$statement->execute([
 				"name" => $object->getName(), 
 				"age" => $object->getAge(),
