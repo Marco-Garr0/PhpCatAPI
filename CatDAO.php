@@ -5,11 +5,23 @@ include_once "Cat.php";
 class CatDAO extends GenericDAO{
 	public static function create(object $object): int{
     		try{
-      			$sql = "INSERT INTO cats VALUES(NULL, :name, :age);";
+      			$sql = "INSERT INTO cats VALUES(NULL,
+                        :name, :age, :image,
+                        :whereWasFound, :whereWasSeen,
+                        :sex, :price, :color,
+                        :weight, :breed);";
       			$statement = GenericDAO::$connection->prepare($sql);
       			$statement->execute([
         			"name" => $object->getName(), 
-        			"age" => $object->getAge()
+        			"age" => $object->getAge(),
+					"image" => $object->getImage(),
+					"whereWasFound" => $object->getWhereWasFound(),
+					"whereWasSeen" => $object->getWhereWasSeen(),
+					"sex" => $object->getSex(),
+					"price" => $object->getPrice(),
+					"color" => $object->getColor(),
+					"weight" => $object->getWeight(),
+					"breed" => $object->getBreed()
       			]);
 			$object->setId(GenericDAO::$connection->lastInsertId());
       			return GenericDAO::$connection->lastInsertId();
@@ -29,11 +41,18 @@ class CatDAO extends GenericDAO{
 		        $row = $result->fetch();
 		        if($row == false)
 			      return null;
-			return new Cat($row['id'], $row['name'], $row['age']);
 
-		}catch(PDOException $exception){
-		      $exception->getMessage();
-		      return null;
+				$sex = False;
+				if ($row["sex"] == 1) {
+					$sex = True;
+				}
+				return new Cat($row['id'], $row['name'], $row['age'],
+					null, $row['whereWasFound'], $row['whereWasSeen'],
+					$sex, $row['price'], $row['color'], $row['weight'], $row['breed']);
+
+			}catch(PDOException $exception){
+				$exception->getMessage();
+			    return null;
 		}
 	}
 
@@ -48,7 +67,13 @@ class CatDAO extends GenericDAO{
 
 			$cats = [];
 			foreach($results as $result){
-				$cats[] = new Cat($result["id"], $result["name"], $result["age"]);
+				$sex = False;
+				if ($result["sex"] == 1) {
+					$sex = True;
+				}
+				$cats[] = new Cat($result['id'], $result['name'], $result['age'],
+					null, $result['whereWasFound'], $result['whereWasSeen'],
+					$sex, $result['price'], $result['color'], $result['weight'], $result['breed']);
 			}
 		}catch(PDOException $e){
 			echo $e->getMessage();
@@ -66,7 +91,13 @@ class CatDAO extends GenericDAO{
 
 			$cats = [];
 			foreach($results as $result)
-				$cats[] = new Cat($result["id"], $result["name"], $result["age"]);
+				$sex = False;
+				if ($result["sex"] == 1) {
+					$sex = True;
+				}
+				$cats[] = new Cat($result['id'], $result['name'], $result['age'],
+				null, $result['whereWasFound'], $result['whereWasSeen'],
+				$sex, $result['price'], $result['color'], $result['weight'], $result['breed']);
 			
 		}catch(PDOException $e){
 			echo $e->getMessage();
@@ -106,6 +137,5 @@ class CatDAO extends GenericDAO{
 			return true;
 		}
 	}
-
 }
 ?>

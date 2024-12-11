@@ -2,7 +2,7 @@
 class Cat{
 	private int $id = 0;
 	private ?string $name = null;
-	private ?string $image = null;
+	private ?string $image = null;	#TODO
 	private ?int $age = 0;
 	private ?string $whereWasFound = null;
 	private ?string $whereWasSeen = null;
