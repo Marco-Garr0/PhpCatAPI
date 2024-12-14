@@ -4,32 +4,31 @@ include_once "Cat.php";
 
 class CatDAO extends GenericDAO{
 	public static function create(object $object): int{
-    		try{
-      			$sql = "INSERT INTO cats VALUES(NULL,
-                        :name, :age, :image,
-                        :whereWasFound, :whereWasSeen,
-                        :sex, :price, :color,
-                        :weight, :breed);";
-      			$statement = GenericDAO::$connection->prepare($sql);
-      			$statement->execute([
-        			"name" => $object->getName(), 
-        			"age" => $object->getAge(),
-					"image" => $object->getImage(),
-					"whereWasFound" => $object->getWhereWasFound(),
-					"whereWasSeen" => $object->getWhereWasSeen(),
-					"sex" => $object->getSex(),
-					"price" => $object->getPrice(),
-					"color" => $object->getColor(),
-					"weight" => $object->getWeight(),
-					"breed" => $object->getBreed()
-      			]);
+		try{
+			$sql = "INSERT INTO cats VALUES(NULL,
+					:name, :image, :age,
+					:whereWasFound, :whereWasSeen,
+					:sex, :price, :color,
+					:weight, :breed);";
+			$statement = GenericDAO::$connection->prepare($sql);
+			$statement->execute([
+				"name" => $object->getName(),
+				"age" => $object->getAge(),
+				"image" => $object->getImage(),
+				"whereWasFound" => $object->getWhereWasFound(),
+				"whereWasSeen" => $object->getWhereWasSeen(),
+				"sex" => $object->getSex(),
+				"price" => $object->getPrice(),
+				"color" => $object->getColor(),
+				"weight" => $object->getWeight(),
+				"breed" => $object->getBreed()
+			]);
 			$object->setId(GenericDAO::$connection->lastInsertId());
-      			return GenericDAO::$connection->lastInsertId();
-
+			return GenericDAO::$connection->lastInsertId();
 		}
 		catch(PDOException $exception){
-      		$exception->getMessage();
-      		return -1;
+			var_dump($exception->getMessage());
+			return 0;
 		}
 	}
 
@@ -51,7 +50,7 @@ class CatDAO extends GenericDAO{
 					$sex, $row['price'], $row['color'], $row['weight'], $row['breed']);
 
 			}catch(PDOException $exception){
-				$exception->getMessage();
+				var_dump($exception->getMessage());
 			    return null;
 		}
 	}
@@ -119,7 +118,7 @@ class CatDAO extends GenericDAO{
 				"id" => $object->getId()
 			]);
     		}catch(PDOException $exception){
-      			$exception->getMessage();
+      			var_dump($exception->getMessage());
       			return true;
     		}
 	}

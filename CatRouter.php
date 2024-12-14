@@ -68,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "DELETE"){
 		return;
 	}
 
-	$catToDelete = new Cat($request,"",0);
+	$catToDelete = new Cat($request, null, null, null, null, null, null, null, null, null, null);
 	$response = $REST->delete($catToDelete);
 	if($response){
 		http_response_code(404);

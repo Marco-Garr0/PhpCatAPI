@@ -7,7 +7,7 @@ class Cat{
 	private ?string $whereWasFound = null;
 	private ?string $whereWasSeen = null;
 	private ?bool $sex = null;
-	private ?string $price = null;
+	private ?int $price = null;
 	private ?string $color = null;
 	private ?int $weight = 0;
 	private ?string $breed = null;
@@ -51,7 +51,7 @@ class Cat{
 	public function getSex(): ?bool{
 		return $this->sex;
 	}
-	public function getPrice(): ?String{
+	public function getPrice(): ?int{
 		return $this->price;
 	}
 	public function getColor(): ?String{
@@ -119,9 +119,10 @@ class Cat{
 	}
 	public static function jsonToCat(String $json): ?Cat{
 		$decoded = json_decode($json);
-		if($decoded->id === null || $decoded->name == null || $decoded->age == null
+		if($decoded->id === null || $decoded->name == null || $decoded->age === null
 			|| $decoded->image == null || $decoded->whereWasFound == null || $decoded->whereWasSeen == null ||
-			$decoded->sex == null || $decoded->price == null || $decoded->color == null || $decoded->weight == null || $decoded->breed == null)
+			$decoded->sex === null || $decoded->price === null || $decoded->color == null
+			|| $decoded->weight == null || $decoded->breed == null)
 			return null;
 		return new Cat($decoded->id, $decoded->name, $decoded->age,
 			$decoded->image, $decoded->whereWasFound, $decoded->whereWasSeen, $decoded->sex, $decoded->price,

@@ -9,7 +9,9 @@ class GenericREST{
 	}
 	public function post(object $request): ?object{
 		try{
-			$this->DAO::create($request);
+			$ret = $this->DAO::create($request);
+			if($ret == 0)
+				return null;
 		}catch (PDOException $e){
 			return null;
 		}
