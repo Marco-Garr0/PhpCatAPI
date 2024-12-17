@@ -14,3 +14,184 @@ CREATE TABLE cats(
     weight INTEGER,
     breed VARCHAR(15)
 );
+```
+
+## API
+
+### GET /CatRouter?id={id}
+
+#### Request
+| Parameter | Type | Description        |
+|-----------|------|--------------------|
+| id        | int  | Cat id from the db |
+
+**NOTE**: If the id is not present in the db,
+the API will return all the cats in the db.
+
+#### Response
+```json
+[
+  {
+    "id": 1,
+    "name": "Alfonso",
+    "image": "test",
+    "age": 4,
+    "whereWasFound": "Termoli",
+    "whereWasSeen": "Bari",
+    "sex": true,
+    "price": 5,
+    "color": "Daltonico",
+    "weight": 59,
+    "breed":"Pastore australiano"
+  }
+]
+```
+
+| Parameter     | Type    | Description             |
+|---------------|---------|-------------------------|
+| id            | int     | Cat id from the db      |
+| name          | string  | Cat name                |
+| image         | string  | Cat image               |
+| age           | int     | Cat age                 |
+| whereWasFound | string  | Where the cat was found |
+| whereWasSeen  | string  | Where the Cat was seen  |
+| sex           | boolean | cat sex                 |
+| price         | int     | Cat price               |
+| color         | string  | Cat color               |
+| weight        | int     | Cat weight              |
+| breed         | string  | Cat breed               |
+
+### POST /CatRouter
+
+#### Request
+```json
+{
+    "id": 0,
+    "name": "Alfonso",
+    "image": "test",
+    "age": 4,
+    "whereWasFound": "Termoli",
+    "whereWasSeen": "Bari",
+    "sex": true,
+    "price": 5,
+    "color": "Daltonico",
+    "weight": 59,
+    "breed":"Pastore australiano"
+}
+```
+
+| Parameter     | Type    | Description             |
+|---------------|---------|-------------------------|
+| id            | int     | Cat id from the db      |
+| name          | string  | Cat name                |
+| image         | string  | Cat image               |
+| age           | int     | Cat age                 |
+| whereWasFound | string  | Where the cat was found |
+| whereWasSeen  | string  | Where the Cat was seen  |
+| sex           | boolean | cat sex                 |
+| price         | int     | Cat price               |
+| color         | string  | Cat color               |
+| weight        | int     | Cat weight              |
+| breed         | string  | Cat breed               |
+
+#### Response
+
+```json
+{
+    "id": 1,
+    "name": "Alfonso",
+    "image": "test",
+    "age": 4,
+    "whereWasFound": "Termoli",
+    "whereWasSeen": "Bari",
+    "sex": true,
+    "price": 5,
+    "color": "Daltonico",
+    "weight": 59,
+    "breed":"Pastore australiano"  
+}
+```
+
+| Parameter     | Type    | Description             |
+|---------------|---------|-------------------------|
+| id            | int     | Cat id from the db      |
+| name          | string  | Cat name                |
+| image         | string  | Cat image               |
+| age           | int     | Cat age                 |
+| whereWasFound | string  | Where the cat was found |
+| whereWasSeen  | string  | Where the Cat was seen  |
+| sex           | boolean | cat sex                 |
+| price         | int     | Cat price               |
+| color         | string  | Cat color               |
+| weight        | int     | Cat weight              |
+| breed         | string  | Cat breed               |
+
+### PUT /CatRouter
+
+#### Request
+```json
+{
+    "id": 1,
+    "name": "Alfonso",
+    "image": "test",
+    "age": 4,
+    "whereWasFound": "Termoli",
+    "whereWasSeen": "Bari",
+    "sex": true,
+    "price": 5,
+    "color": "Daltonico",
+    "weight": 59,
+    "breed":"Pastore australiano"
+}
+```
+
+#### Response
+
+```json
+{
+    "id": 1,
+    "name": "Alfonso",
+    "image": "test",
+    "age": 4,
+    "whereWasFound": "Termoli",
+    "whereWasSeen": "Bari",
+    "sex": true,
+    "price": 5,
+    "color": "Daltonico",
+    "weight": 59,
+    "breed":"Pastore australiano"
+}
+```
+
+| Parameter     | Type    | Description             |
+|---------------|---------|-------------------------|
+| id            | int     | Cat id from the db      |
+| name          | string  | Cat name                |
+| image         | string  | Cat image               |
+| age           | int     | Cat age                 |
+| whereWasFound | string  | Where the cat was found |
+| whereWasSeen  | string  | Where the Cat was seen  |
+| sex           | boolean | cat sex                 |
+| price         | int     | Cat price               |
+| color         | string  | Cat color               |
+| weight        | int     | Cat weight              |
+| breed         | string  | Cat breed               |
+
+### DELETE /CatRouter?id={id}
+
+#### Request
+| Parameter | Type | Description        |
+|-----------|------|--------------------|
+| id        | int  | Cat id from the db |
+
+#### Response
+```json
+{
+  "deleted": true
+}
+```
+
+| Parameter | Type    | Description            |
+|-----------|---------|------------------------|
+| deleted   | boolean | If the cat was deleted |
+
