@@ -5,6 +5,7 @@
 CREATE TABLE cats(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(20),
+    image BLOB,
     age INTEGER,
     WhereWasFound TEXT,
     WhereWasSeen TEXT,
@@ -47,19 +48,19 @@ the API will return all the cats in the db.
 ]
 ```
 
-| Parameter     | Type    | Description             |
-|---------------|---------|-------------------------|
-| id            | int     | Cat id from the db      |
-| name          | string  | Cat name                |
-| image         | string  | Cat image               |
-| age           | int     | Cat age                 |
-| whereWasFound | string  | Where the cat was found |
-| whereWasSeen  | string  | Where the Cat was seen  |
-| sex           | boolean | cat sex                 |
-| price         | int     | Cat price               |
-| color         | string  | Cat color               |
-| weight        | int     | Cat weight              |
-| breed         | string  | Cat breed               |
+| Parameter     | Type    | Description                 |
+|---------------|---------|-----------------------------|
+| id            | int     | Cat id from the db          |
+| name          | string  | Cat name                    |
+| image         | string  | Cat image encoded in base64 |
+| age           | int     | Cat age                     |
+| whereWasFound | string  | Where the cat was found     |
+| whereWasSeen  | string  | Where the Cat was seen      |
+| sex           | boolean | cat sex                     |
+| price         | int     | Cat price                   |
+| color         | string  | Cat color                   |
+| weight        | int     | Cat weight                  |
+| breed         | string  | Cat breed                   |
 
 ### POST /CatRouter
 
@@ -80,19 +81,19 @@ the API will return all the cats in the db.
 }
 ```
 
-| Parameter     | Type    | Description             |
-|---------------|---------|-------------------------|
-| id            | int     | Cat id from the db      |
-| name          | string  | Cat name                |
-| image         | string  | Cat image               |
-| age           | int     | Cat age                 |
-| whereWasFound | string  | Where the cat was found |
-| whereWasSeen  | string  | Where the Cat was seen  |
-| sex           | boolean | cat sex                 |
-| price         | int     | Cat price               |
-| color         | string  | Cat color               |
-| weight        | int     | Cat weight              |
-| breed         | string  | Cat breed               |
+| Parameter     | Type    | Description                 |
+|---------------|---------|-----------------------------|
+| id            | int     | Cat id from the db          |
+| name          | string  | Cat name                    |
+| image         | string  | Cat image encoded in base64 |
+| age           | int     | Cat age                     |
+| whereWasFound | string  | Where the cat was found     |
+| whereWasSeen  | string  | Where the Cat was seen      |
+| sex           | boolean | cat sex                     |
+| price         | int     | Cat price                   |
+| color         | string  | Cat color                   |
+| weight        | int     | Cat weight                  |
+| breed         | string  | Cat breed                   |
 
 #### Response
 
@@ -112,19 +113,19 @@ the API will return all the cats in the db.
 }
 ```
 
-| Parameter     | Type    | Description             |
-|---------------|---------|-------------------------|
-| id            | int     | Cat id from the db      |
-| name          | string  | Cat name                |
-| image         | string  | Cat image               |
-| age           | int     | Cat age                 |
-| whereWasFound | string  | Where the cat was found |
-| whereWasSeen  | string  | Where the Cat was seen  |
-| sex           | boolean | cat sex                 |
-| price         | int     | Cat price               |
-| color         | string  | Cat color               |
-| weight        | int     | Cat weight              |
-| breed         | string  | Cat breed               |
+| Parameter     | Type    | Description                  |
+|---------------|---------|------------------------------|
+| id            | int     | Cat id from the db           |
+| name          | string  | Cat name                     |
+| image         | string  | Cat image encoded in base 64 |
+| age           | int     | Cat age                      |
+| whereWasFound | string  | Where the cat was found      |
+| whereWasSeen  | string  | Where the Cat was seen       |
+| sex           | boolean | cat sex                      |
+| price         | int     | Cat price                    |
+| color         | string  | Cat color                    |
+| weight        | int     | Cat weight                   |
+| breed         | string  | Cat breed                    |
 
 ### PUT /CatRouter
 
@@ -163,19 +164,19 @@ the API will return all the cats in the db.
 }
 ```
 
-| Parameter     | Type    | Description             |
-|---------------|---------|-------------------------|
-| id            | int     | Cat id from the db      |
-| name          | string  | Cat name                |
-| image         | string  | Cat image               |
-| age           | int     | Cat age                 |
-| whereWasFound | string  | Where the cat was found |
-| whereWasSeen  | string  | Where the Cat was seen  |
-| sex           | boolean | cat sex                 |
-| price         | int     | Cat price               |
-| color         | string  | Cat color               |
-| weight        | int     | Cat weight              |
-| breed         | string  | Cat breed               |
+| Parameter     | Type    | Description                 |
+|---------------|---------|-----------------------------|
+| id            | int     | Cat id from the db          |
+| name          | string  | Cat name                    |
+| image         | string  | Cat image encoded in base64 |
+| age           | int     | Cat age                     |
+| whereWasFound | string  | Where the cat was found     |
+| whereWasSeen  | string  | Where the Cat was seen      |
+| sex           | boolean | cat sex                     |
+| price         | int     | Cat price                   |
+| color         | string  | Cat color                   |
+| weight        | int     | Cat weight                  |
+| breed         | string  | Cat breed                   |
 
 ### DELETE /CatRouter?id={id}
 
