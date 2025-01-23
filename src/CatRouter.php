@@ -1,6 +1,6 @@
 <?php
+include_once "DAO/CatDAO.php";
 include_once "GenericREST.php";
-include_once "CatDAO.php";
 $REST = new GenericREST(new CatDAO());
 $REST->DAO::connect();
 if($_SERVER["REQUEST_METHOD"] == "POST"){
