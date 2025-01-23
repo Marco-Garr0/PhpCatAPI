@@ -29,7 +29,7 @@ CREATE TABLE cats(
 
 ## API
 
-### GET /CatRouter?id={id}
+### GET /CatRouter.php?id={id}
 
 #### Request
 | Parameter | Type | Description        |
@@ -72,7 +72,7 @@ the API will return all the cats in the db.
 | weight        | int     | Cat weight                  |
 | breed         | string  | Cat breed                   |
 
-### POST /CatRouter
+### POST /CatRouter.php
 
 #### Request
 ```json
@@ -137,7 +137,7 @@ the API will return all the cats in the db.
 | weight        | int     | Cat weight                   |
 | breed         | string  | Cat breed                    |
 
-### PUT /CatRouter
+### PUT /CatRouter.php
 
 #### Request
 ```json
@@ -188,7 +188,7 @@ the API will return all the cats in the db.
 | weight        | int     | Cat weight                  |
 | breed         | string  | Cat breed                   |
 
-### DELETE /CatRouter?id={id}
+### DELETE /CatRouter.php?id={id}
 
 #### Request
 | Parameter | Type | Description        |
