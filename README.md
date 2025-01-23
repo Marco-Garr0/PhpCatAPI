@@ -1,11 +1,21 @@
 # Cat API 
 
+## Start up
+The web server is Apache and the database is SQLite.
+The project can be run with Docker.
+
+    docker compose up --build
+
+or just:
+
+    docker compose up
+
 ## DB structure
 ```sql
 CREATE TABLE cats(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(20),
-    image BLOB,
+    image BLOB,,
     age INTEGER,
     WhereWasFound TEXT,
     WhereWasSeen TEXT,
