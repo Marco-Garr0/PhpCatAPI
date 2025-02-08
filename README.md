@@ -206,3 +206,12 @@ the API will return all the cats in the db.
 |-----------|---------|------------------------|
 | deleted   | boolean | If the cat was deleted |
 
+## Troubleshooting
+if the db returns an error like:
+    
+        string(70) "SQLSTATE[HY000]: General error: 8 attempt to write a readonly database"
+
+you need to change the permissions of the db file and the directory where it is located.
+
+    chmod 777 cats.db
+    chmod 777 ./src
